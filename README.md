@@ -1,71 +1,150 @@
-# 🌍 COVID-19 Global Vaccination Analysis & Forecasting
+# 🌍 COVID-19 Global Vaccination Analysis & SARIMA Forecasting
 
-An interactive dashboard for epidemiological data analysis, featuring Exploratory Data Analysis (EDA) and time-series forecasting of the global COVID-19 vaccination rollout. Built using Streamlit, Plotly, and Statsmodels.
+<div align="center">
 
-![Dashboard Preview](https://img.shields.io/badge/Status-Active-success)
-![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.25%2B-FF4B4B?logo=streamlit&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-5.11%2B-3F4F75?logo=plotly&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-## 📌 Features
+**An interactive epidemiological dashboard with strategic EDA and SARIMA time-series forecasting, built on the WHO-sourced COVID-19 World Vaccination dataset.**
 
-*   **📊 Strategic EDA Visualizations**: Interactive rankings and visualizations covering absolute volume leaders, per-capita coverage, and global trends.
-*   **🔮 SARIMA Time-Series Forecasting**: Generates a dynamic 30-day (configurable) trajectory forecast with 90% confidence intervals for selected countries, taking into account weekly seasonality.
-*   **⚔️ Cross-Country Comparison**: Compare vaccination rollout dynamics (daily doses, total doses, fully vaccinated percentages) across up to 6 different nations.
-*   **📋 Interactive Data Explorer**: Filter, inspect, and download cleaned, subsetted data directly from the dashboard.
-*   **🧬 Vaccine Portfolio Insights**: Analyze the widespread adoption of different vaccine combinations globally.
+</div>
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🏆 **Country Rankings** | Top-N countries by absolute dose count and per-capita coverage, with WHO 70% herd-immunity threshold line |
+| 📈 **Global Trend** | Worldwide daily vaccinations with 7-day and 30-day moving averages, peak annotation, and country-level breakdown |
+| 🔮 **SARIMA Forecasting** | On-demand `SARIMA(2,1,2)×(1,1,1,7)` model with 90% confidence intervals and CSV export |
+| ⚔️ **Country Comparison** | Side-by-side comparison of up to 6 countries across daily doses, cumulative doses, and fully vaccinated % |
+| 🧬 **Vaccine Portfolio** | Horizontal bar chart of the most widely adopted vaccine combinations across countries |
+| 📋 **Data Explorer** | Filterable, downloadable data table with descriptive statistics |
+
+---
+
+## 🖥️ Dashboard Preview
+
+> Upload `country_vaccinations.csv` from Kaggle to unlock all visualisations.
+
+**Tabs available after upload:**
+- **Rankings** — Absolute and per-capita leaders, vaccine portfolio adoption
+- **Global Trend** — Worldwide vaccination pace over time
+- **Forecasting** — Country-specific SARIMA forecast with confidence bands
+- **Comparison** — Multi-country rollout comparison
+- **Data Explorer** — Raw data viewer and downloader
+
+---
 
 ## 🏗️ Technology Stack
 
-*   **Frontend/App Framework**: `streamlit`
-*   **Data Processing**: `pandas`, `numpy`
-*   **Data Visualization**: `plotly`
-*   **Time-Series Modeling**: `statsmodels` (SARIMA)
+| Library | Version | Role |
+|---|---|---|
+| `streamlit` | ≥ 1.25 | Interactive web application |
+| `pandas` | ≥ 1.5 | Data loading and cleaning |
+| `numpy` | ≥ 1.23 | Numerical operations |
+| `plotly` | ≥ 5.11 | Interactive visualisations |
+| `statsmodels` | ≥ 0.13.5 | SARIMA time-series modelling |
+| `scikit-learn` | ≥ 1.1 | Error metric calculations |
+| `scipy` | ≥ 1.9 | Statistical utilities |
 
-## 📥 Dataset Requirement
+---
 
-The dashboard relies on the **COVID-19 World Vaccination Progress** dataset by Gabriel Preda on Kaggle.
+## 📥 Dataset
 
-1.  Download the dataset here: [COVID-19 World Vaccination Progress (Kaggle)](https://www.kaggle.com/datasets/gpreda/covid-world-vaccination-progress)
-2.  Save `country_vaccinations.csv` locally. You will upload this directly into the dashboard sidebar when running the app.
+The dashboard uses the **[COVID-19 World Vaccination Progress](https://www.kaggle.com/datasets/gpreda/covid-world-vaccination-progress)** dataset by **Gabriel Preda** on Kaggle (~86,000 rows, 15 columns, 200+ countries).
 
-## 🚀 Installation & Setup
+The dataset is not stored in this repository — see [`data/README.md`](data/README.md) for the full schema and download instructions.
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/sehaan-1/covid-vaccination-analysis.git
-    cd covid-vaccination-analysis
-    ```
+---
 
-2.  **Create a virtual environment (optional but recommended):**
-    ```bash
-    python -m venv venv
-    # Windows
-    venv\Scripts\activate
-    # macOS/Linux
-    source venv/bin/activate
-    ```
+## 🚀 Quickstart
 
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+```bash
+# 1. Clone the repo
+git clone https://github.com/sehaan-1/covid-vaccination-analysis.git
+cd covid-vaccination-analysis
 
-4.  **Run the application:**
-    ```bash
-    streamlit run app.py
-    ```
+# 2. Create and activate a virtual environment
+python -m venv venv
+venv\Scripts\activate          # Windows
+# source venv/bin/activate     # macOS / Linux
 
-## 🛠️ Usage
+# 3. Install dependencies
+pip install -r requirements.txt
 
-1.  Launch the application using the command above. It will open automatically in your default web browser (usually at `http://localhost:8501`).
-2.  In the sidebar, click **"Browse files"** to upload your downloaded `country_vaccinations.csv`.
-3.  Use the sidebar controls to:
-    *   Select specific countries for forecasting.
-    *   Adjust the "Top N" countries for charts.
-    *   Set the forecast horizon (days).
-    *   Change the application's color palette.
-4.  Navigate between the different tabs to explore rankings, global trends, SARIMA forecasts, cross-country comparisons, and the raw data explorer.
+# 4. Launch the dashboard
+streamlit run app.py
+```
+
+Then open [http://localhost:8501](http://localhost:8501) in your browser and upload your `country_vaccinations.csv`.
+
+---
+
+## 🗂️ Repository Structure
+
+```
+covid-vaccination-analysis/
+│
+├── app.py                    # Main Streamlit application (all tabs & charts)
+├── requirements.txt          # Python dependencies
+├── .streamlit/
+│   └── config.toml           # Streamlit theme and server settings
+│
+├── data/
+│   └── README.md             # Dataset schema and download instructions
+│
+├── models/
+│   └── README.md             # SARIMA model documentation
+│
+├── tests/
+│   └── test_pipeline.py      # pytest unit tests for data pipeline
+│
+├── CONTRIBUTING.md           # How to contribute
+├── LICENSE                   # MIT License
+└── README.md                 # This file
+```
+
+---
+
+## 🧪 Running Tests
+
+```bash
+pip install pytest
+pytest tests/ -v
+```
+
+The test suite covers: date parsing, forward-fill logic, non-negative vaccination values, country counts, rolling averages, and the forecast non-negativity clip.
+
+---
+
+## 📈 SARIMA Model Details
+
+The forecasting tab trains a `SARIMA(2,1,2)×(1,1,1,7)` model per selected country:
+
+- **Weekly seasonality** (`s=7`) captures the real-world pattern of reduced weekend reporting.
+- **7-day rolling average** is applied as pre-processing to reduce noise before fitting.
+- **90% confidence intervals** widen naturally at longer horizons, reflecting genuine uncertainty.
+- See [`models/README.md`](models/README.md) for a full breakdown of parameters and preprocessing.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) first.
+
+---
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
+
+---
+
+<div align="center">
+  Built with ❤️ using Streamlit &amp; Statsmodels &nbsp;|&nbsp; Data: WHO via Kaggle
+</div>
