@@ -1,0 +1,27 @@
+{
+    "model_type": "SARIMA",
+    "order": [
+        2,
+        1,
+        2
+    ],
+    "seasonal_order": [
+        1,
+        1,
+        1,
+        7
+    ],
+    "target_country": "United States",
+    "forecast_horizon_days": 30,
+    "training_start": "2020-12-13",
+    "training_end": "2022-03-28",
+    "n_observations": 471,
+    "aic": 9452.5734,
+    "bic": 9485.5005,
+    "hqic": 9465.5476,
+    "saved_timestamp": "20260428_211550",
+    "pickle_file": "sarima_covid_20260428_211550.pkl",
+    "joblib_file": "sarima_covid_20260428_211550.joblib",
+    "statsmodels_file": "sarima_covid_20260428_211550.statsmodels",
+    "python_version": "3.12.13"
+}
