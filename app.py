@@ -145,13 +145,14 @@ def load_and_clean(file):
         'people_fully_vaccinated_per_hundred'
     ]
 
-    def fill_group(g):
-        for c in cum_cols:
-            g[c] = g[c].ffill().fillna(0)
-        g['daily_vaccinations'] = g['daily_vaccinations'].fillna(0)
-        return g
-
-    df = df.groupby('country', group_keys=False).apply(fill_group)
+    # Forward-fill cumulative columns and fill daily with 0, per country.
+    # Use .transform() instead of .apply() to avoid pandas 3.x dropping the
+    # grouping column from the result.
+    for c in cum_cols:
+        df[c] = df.groupby('country')[c].transform(lambda x: x.ffill().fillna(0))
+    df['daily_vaccinations'] = df.groupby('country')['daily_vaccinations'].transform(
+        lambda x: x.fillna(0)
+    )
     return df.reset_index(drop=True)
 
 
